@@ -221,6 +221,7 @@ async function run() {
     } catch (error) {
         logger.error(`[登录] ${error}`);
     }
+    if (token === undefined) return;
     try {
         let result = await daily(randomTemperature, token);
         if (result.code == 1) {
