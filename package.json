@@ -1,0 +1,23 @@
+{
+  "name": "rock-daily-report",
+  "version": "1.0.0",
+  "description": "提交岩石的每日填报。",
+  "main": "daily.js",
+  "dependencies": {
+    "request": "^2.88.2",
+    "tracer": "^1.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Android-KitKat/Rock-Auto-Daily-Report"
+  },
+  "keywords": [
+    "auto"
+  ],
+  "author": "Android-KitKat",
+  "license": "MIT"
+}
