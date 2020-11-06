@@ -35,7 +35,7 @@ function login(username, password) {
             body: JSON.stringify(requestData)
         }, function(error, response, body) {
             if (error) {
-                return reject(`${error}`);
+                return reject(error);
             }
             if (response.statusCode != 200) {
                 return reject(`${response.statusCode} ${response.statusMessage}`);
@@ -219,7 +219,7 @@ async function run() {
             logger.warn(`[登录] ${result.description}`);
         }
     } catch (error) {
-        logger.error(`[登录] ${error}`);
+        logger.error(`[登录] ${error.code}`);
     }
     if (token === undefined) return;
     try {
@@ -230,7 +230,7 @@ async function run() {
             logger.warn(`[每日填报] ${result.description}`);
         }
     } catch (error) {
-        logger.error(`[每日填报] ${error}`);
+        logger.error(`[每日填报] ${error.code}`);
     }
 }
 
