@@ -215,6 +215,7 @@ function daily(temperature, token) {
 }
 
 async function run() {
+    process.exitCode = 1;
     if (randomTemperature > maxTemperature) {
         logger.warn(`${temperature}℃已超过允许的体温最大值，程序中止运行！`);
         return;
@@ -236,6 +237,7 @@ async function run() {
         let result = await daily(randomTemperature, token);
         if (result.code == 1) {
             logger.info(`[每日填报] 已提交${randomTemperature}℃`);
+            process.exitCode = 0;
         } else {
             logger.warn(`[每日填报] ${result.description}`);
         }
