@@ -12,6 +12,9 @@ const logger = require('tracer').colorConsole({
         function (data) {
             console.log(data.output);
         }
+    ],
+    filters: [
+        filterLogs
     ]
 });
 
@@ -21,6 +24,13 @@ var password = process.argv[4];
 
 const maxTemperature = 36.7;
 var randomTemperature = 36.5 + (Math.floor(Math.random() * 2.4) / 10);
+
+function filterLogs(str) {
+    let result = str;
+    result = result.replace(new RegExp(host, 'g'), 'Host');
+    result = result.replace(/((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g, 'IP');
+    return result;
+}
 
 function login(username, password) {
     return new Promise(function(resolve, reject) {
@@ -219,7 +229,7 @@ async function run() {
             logger.warn(`[登录] ${result.description}`);
         }
     } catch (error) {
-        logger.error(`[登录] ${error.code}`);
+        logger.error(`[登录] ${error}`);
     }
     if (token === undefined) return;
     try {
@@ -230,7 +240,7 @@ async function run() {
             logger.warn(`[每日填报] ${result.description}`);
         }
     } catch (error) {
-        logger.error(`[每日填报] ${error.code}`);
+        logger.error(`[每日填报] ${error}`);
     }
 }
 
