@@ -1,7 +1,8 @@
 'use strict';
 const request = require('request');
 const fs = require('fs');
-const logger = require('tracer').colorConsole({
+const colors = require('colors/safe');
+const logger = require('tracer').console({
     format: '{{timestamp}} <{{title}}> {{message}}',
     dateformat: 'yyyy-mm-dd HH:MM:ss Z',
     transport: [
@@ -15,7 +16,16 @@ const logger = require('tracer').colorConsole({
         }
     ],
     filters: [
-        filterLogs
+        filterLogs,
+        {
+            //log: do nothing
+            trace: colors.magenta,
+            debug: colors.cyan,
+            info: colors.green,
+            warn: colors.yellow,
+            error: colors.red.bold,
+            fatal: colors.red.bold
+        }
     ]
 });
 
