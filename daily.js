@@ -72,6 +72,7 @@ function login(username, password) {
 
 function daily(temperature, token) {
     return new Promise(function(resolve, reject) {
+        if (token === undefined) reject(new Error('token未定义。'));
         let requestData = {
             "isIos": false,
             "showInfo": [
@@ -248,7 +249,6 @@ async function run() {
     } catch (error) {
         logger.error(`[登录] ${error}`);
     }
-    if (token === undefined) return;
     try {
         let result = await daily(randomTemperature, token);
         if (result.code == 1) {
