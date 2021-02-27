@@ -35,6 +35,8 @@ var password = process.argv[4];
 
 const maxTemperature = 36.7;
 var randomTemperature = 36.5 + (Math.floor(Math.random() * 2.4) / 10);
+const maxFail = 5;
+var fail = 0;
 
 function filterLogs(str) {
     let result = str;
@@ -254,6 +256,10 @@ async function run() {
         }
     } catch (error) {
         logger.error(`[每日填报] ${error}`);
+    }
+    if (process.exitCode === 1 && ++fail <= maxFail) {
+        logger.warn(`第${fail}次失败，重新尝试。`);
+        await run();
     }
 }
 
