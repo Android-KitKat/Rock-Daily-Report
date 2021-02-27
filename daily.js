@@ -37,6 +37,7 @@ const maxTemperature = 36.7;
 var randomTemperature = 36.5 + (Math.floor(Math.random() * 2.4) / 10);
 const maxFail = 5;
 var fail = 0;
+const timeout = 1e4;
 
 function filterLogs(str) {
     let result = str;
@@ -55,7 +56,8 @@ function login(username, password) {
                 "content-type": "application/json",
                 "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat"
             },
-            body: JSON.stringify(requestData)
+            body: JSON.stringify(requestData),
+            timeout: timeout
         }, function(error, response, body) {
             if (error) {
                 return reject(error);
@@ -214,7 +216,8 @@ function daily(temperature, token) {
                 "User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36 MicroMessenger/7.0.9.501 NetType/WIFI MiniProgramEnv/Windows WindowsWechat",
                 "token": token
             },
-            body: JSON.stringify(requestData)
+            body: JSON.stringify(requestData),
+            timeout: timeout
         }, function(error, response, body) {
             if (error) {
                 return reject(error);
